@@ -477,17 +477,26 @@
 
     /* EVENTS */
     #events { background: #1C2B3A; padding: 7rem 2rem; }
-    .events-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+    .events-layout {
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.35fr;
+      gap: 5rem; align-items: start;
+    }
+    .events-left .section-h2-light { text-align: left; margin-bottom: 1.2rem; }
+    .events-left .section-eyebrow { text-align: left; }
+    .events-left .body-p-light {
+      text-align: left; margin: 0 0 2.5rem; max-width: none;
+    }
     .signup-box {
       background: rgba(46,64,87,0.7);
       border: 1px solid rgba(168,200,168,0.22);
-      border-radius: 4px; padding: 3rem 2.5rem;
-      max-width: 500px; margin: 0 auto;
+      border-radius: 4px; padding: 2rem 2rem;
+      max-width: none; margin: 0;
     }
     .signup-h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; color: #F0EBE3;
-      margin-bottom: 0.5rem; font-weight: 400;
+      font-size: 1.4rem; color: #F0EBE3;
+      margin-bottom: 0.4rem; font-weight: 400;
     }
     .signup-p {
       font-family: 'Jost', sans-serif; font-size: 0.82rem;
@@ -495,7 +504,7 @@
     }
     .signup-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .email-input {
-      flex: 1; min-width: 200px;
+      flex: 1; min-width: 160px;
       background: rgba(28,43,58,0.8); color: #F0EBE3;
       border: 1px solid rgba(168,200,168,0.35);
       border-radius: 2px; padding: 0.7rem 0.9rem;
@@ -510,6 +519,73 @@
       transition: background 0.2s;
     }
     .btn-subscribe:hover { background: #4E7A4E; }
+
+    /* Event cards */
+    .upcoming-label {
+      font-family: 'Jost', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: #7EA87E; margin-bottom: 1.5rem; font-weight: 600;
+    }
+    .event-card {
+      background: rgba(46,64,87,0.45);
+      border: 1px solid rgba(168,200,168,0.18);
+      border-radius: 4px; overflow: hidden;
+      margin-bottom: 1.5rem; transition: border-color 0.25s;
+    }
+    .event-card:last-child { margin-bottom: 0; }
+    .event-card:hover { border-color: rgba(168,200,168,0.4); }
+    .event-card-img { position: relative; overflow: hidden; }
+    .event-card-img img {
+      width: 100%; height: 210px; object-fit: cover; display: block;
+      filter: brightness(0.82) saturate(0.85);
+      transition: transform 0.45s ease, filter 0.45s ease;
+    }
+    .event-card:hover .event-card-img img {
+      transform: scale(1.04); filter: brightness(0.9) saturate(0.95);
+    }
+    .event-tag {
+      position: absolute; top: 1rem; left: 1rem;
+      background: rgba(78,122,78,0.92); color: #fff;
+      font-family: 'Jost', sans-serif; font-size: 0.58rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 0.25rem 0.65rem; border-radius: 2px;
+    }
+    .event-card-body { padding: 1.4rem 1.5rem 1.6rem; }
+    .event-meta {
+      display: flex; align-items: center; gap: 0.55rem;
+      margin-bottom: 0.55rem;
+    }
+    .event-date, .event-time {
+      font-family: 'Jost', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.07em; color: #9EB8C2; font-weight: 400;
+    }
+    .event-dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: #4E7A4E; display: inline-block; flex-shrink: 0;
+    }
+    .event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; color: #F0EBE3;
+      font-weight: 400; margin-bottom: 0.55rem; line-height: 1.2;
+    }
+    .event-desc {
+      font-family: 'Jost', sans-serif; font-size: 0.82rem;
+      color: #9EB8C2; line-height: 1.8; font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    .event-link {
+      font-family: 'Jost', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #7EA87E; text-decoration: none; font-weight: 600;
+      transition: color 0.2s;
+    }
+    .event-link:hover { color: #A8C8A8; }
+    @media (max-width: 860px) {
+      .events-layout { grid-template-columns: 1fr; gap: 3.5rem; }
+      .events-left .section-h2-light { text-align: center; }
+      .events-left .section-eyebrow { text-align: center; }
+      .events-left .body-p-light { text-align: center; }
+    }
 
     /* CONTACT */
     #contact { background: #EDE7DD; padding: 7rem 2rem; }
@@ -991,19 +1067,69 @@
 
 <!-- EVENTS -->
 <section id="events">
-  <div class="events-inner">
-    <p class="section-eyebrow">What's On</p>
-    <h2 class="section-h2-light">Events &amp; Workshops</h2>
-    <p class="body-p-light" style="max-width:600px;margin:0 auto 3.5rem;">
-      From community planting days to creative arts workshops, we host events that bring people together around the orchard throughout the year. Sign up below to hear about what's coming up.
-    </p>
-    <div class="signup-box">
-      <h3 class="signup-h3">Stay connected</h3>
-      <p class="signup-p">Orchard news and upcoming events, delivered to your inbox.</p>
-      <div class="signup-row">
-        <input type="email" class="email-input" placeholder="Your email address" />
-        <button class="btn-subscribe">Subscribe</button>
+  <div class="events-layout">
+
+    <!-- LEFT: intro + signup -->
+    <div class="events-left">
+      <p class="section-eyebrow">What's On</p>
+      <h2 class="section-h2-light">Events &amp; Workshops</h2>
+      <p class="body-p-light">
+        From community planting days to creative arts workshops, we host events that bring people together around the orchard throughout the year. Sign up to be the first to hear what's coming.
+      </p>
+      <div class="signup-box">
+        <h3 class="signup-h3">Stay connected</h3>
+        <p class="signup-p">Orchard news and upcoming events, delivered to your inbox.</p>
+        <div class="signup-row">
+          <input type="email" class="email-input" placeholder="Your email address" />
+          <button class="btn-subscribe">Subscribe</button>
+        </div>
       </div>
+    </div>
+
+    <!-- RIGHT: upcoming event cards -->
+    <div class="events-right">
+      <p class="upcoming-label">Upcoming Events</p>
+
+      <!-- Event 1 -->
+      <div class="event-card">
+        <div class="event-card-img">
+          <img
+            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80&auto=format&fit=crop"
+            alt="Spring Planting Day at the orchard" />
+          <span class="event-tag">Community</span>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <span class="event-date">Sat 19 April 2025</span>
+            <span class="event-dot"></span>
+            <span class="event-time">10:00 – 14:00</span>
+          </div>
+          <h3 class="event-title">Spring Planting Day</h3>
+          <p class="event-desc">Join us for the first big planting day of the season. Help sow new fruit trees, connect with neighbours, and celebrate the orchard coming back to life. All welcome — tools and refreshments provided.</p>
+          <a class="event-link" href="#">Find out more →</a>
+        </div>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="event-card">
+        <div class="event-card-img">
+          <img
+            src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80&auto=format&fit=crop"
+            alt="Blossom and Brew natural fermentation workshop" />
+          <span class="event-tag">Workshop</span>
+        </div>
+        <div class="event-card-body">
+          <div class="event-meta">
+            <span class="event-date">Sat 10 May 2025</span>
+            <span class="event-dot"></span>
+            <span class="event-time">11:00 – 16:00</span>
+          </div>
+          <h3 class="event-title">Blossom &amp; Brew</h3>
+          <p class="event-desc">A hands-on workshop exploring natural fermentation and foraged flavours. Learn to craft elderflower cordials and wildflower infusions using ingredients from the orchard and local hedgerows.</p>
+          <a class="event-link" href="#">Find out more →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
