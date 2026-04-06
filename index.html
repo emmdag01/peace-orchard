@@ -254,9 +254,10 @@
     /* Timeline */
     .timeline-item {
       display: flex; gap: 1.5rem; margin-bottom: 2rem;
-      opacity: 0; transform: translateY(28px);
+      opacity: 0; transform: translateY(20px);
       transition: opacity 0.9s ease, transform 0.9s ease;
     }
+    .no-js .timeline-item { opacity: 1; transform: translateY(0); }
     .timeline-item.tl-visible { opacity: 1; transform: translateY(0); }
     .timeline-item:last-child { margin-bottom: 0; }
     .timeline-year {
@@ -372,6 +373,73 @@
     .prog-desc {
       font-family: 'Jost', sans-serif; font-size: 0.88rem;
       color: #3A3A3A; line-height: 1.8; font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .prog-cta {
+      display: inline-block;
+      font-family: 'Jost', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #7EA87E; font-weight: 600;
+      background: none; border: none; cursor: pointer;
+      padding: 0; transition: color 0.2s;
+    }
+    .prog-cta:hover { color: #4E7A4E; }
+
+    /* ACTIVITY MODALS */
+    .act-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(28,43,58,0.72); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    .act-modal-overlay.open { display: flex; }
+    .act-modal {
+      background: #F7F3EE; border-radius: 6px;
+      max-width: 580px; width: 100%;
+      max-height: 88vh; overflow-y: auto;
+      position: relative; padding: 3rem;
+      box-shadow: 0 24px 80px rgba(28,43,58,0.28);
+    }
+    .act-modal-close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: none; border: 1px solid rgba(58,58,58,0.2);
+      width: 34px; height: 34px; border-radius: 50%;
+      cursor: pointer; font-size: 0.9rem; color: #3A3A3A;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .act-modal-close:hover { background: #EDE7DD; }
+    .act-modal-eyebrow {
+      font-family: 'Jost', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: #7EA87E; font-weight: 600; margin-bottom: 0.6rem;
+    }
+    .act-modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; color: #1C2B3A;
+      font-weight: 400; margin-bottom: 0.4rem; line-height: 1.2;
+    }
+    .act-modal-tagline {
+      font-family: 'Jost', sans-serif; font-size: 0.75rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 1.5rem;
+    }
+    .act-modal-divider {
+      width: 40px; height: 1px; background: #A8C8A8; margin-bottom: 1.5rem;
+    }
+    .act-modal-body {
+      font-family: 'Jost', sans-serif; font-size: 0.9rem;
+      color: #3A3A3A; line-height: 1.9; font-weight: 300;
+    }
+    .act-modal-body p { margin-bottom: 1rem; }
+    .act-modal-body p:last-child { margin-bottom: 0; }
+    .act-modal-body ul {
+      list-style: none; padding: 0; margin: 0 0 1rem;
+    }
+    .act-modal-body ul li {
+      padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem;
+    }
+    .act-modal-body ul li::before {
+      content: '—'; position: absolute; left: 0; color: #7EA87E;
     }
 
     /* TESTIMONIAL BLOCK */
@@ -975,24 +1043,28 @@
         <h3 class="prog-name">Thrive</h3>
         <p class="prog-tagline" style="color:#7EA87E;">Wellbeing through nature</p>
         <p class="prog-desc">Supporting wellbeing and creativity through nature — bringing people together through orchard life, creative workshops, and intergenerational activity.</p>
+        <button class="prog-cta" onclick="openActModal('modal-thrive')">Find out more →</button>
       </div>
       <div class="prog-card" style="border-top: 3px solid #C49A3C;">
         <div class="prog-icon" style="color:#C49A3C;">❋</div>
         <h3 class="prog-name">Orchard Champions</h3>
         <p class="prog-tagline" style="color:#C49A3C;">Schools programme</p>
         <p class="prog-desc">Working with schools to inspire young people to care for nature and grow peace — peace education, environmental responsibility, and hands-on creativity.</p>
+        <button class="prog-cta" onclick="openActModal('modal-champions')">Find out more →</button>
       </div>
       <div class="prog-card" style="border-top: 3px solid #4E7A4E;">
         <div class="prog-icon" style="color:#4E7A4E;">◈</div>
         <h3 class="prog-name">Peace Orchard Volunteers</h3>
         <p class="prog-tagline" style="color:#4E7A4E;">Community volunteering</p>
         <p class="prog-desc">Local residents who help care for the orchard — planting, maintaining, supporting events, and growing the project alongside their neighbours.</p>
+        <button class="prog-cta" onclick="openActModal('modal-volunteers')">Find out more →</button>
       </div>
       <div class="prog-card" style="border-top: 3px solid #2E4057;">
         <div class="prog-icon" style="color:#2E4057;">⬡</div>
         <h3 class="prog-name">Corporate Orchard Partners</h3>
         <p class="prog-tagline" style="color:#2E4057;">Business engagement</p>
         <p class="prog-desc">Businesses and organisations supporting The Peace Orchard through volunteering days, sponsorship, and skills sharing — connecting CSR with community.</p>
+        <button class="prog-cta" onclick="openActModal('modal-corporate')">Find out more →</button>
       </div>
     </div>
   </div>
@@ -1221,6 +1293,104 @@
 </footer>
 
 
+<!-- ACTIVITY MODALS -->
+
+<!-- Thrive -->
+<div class="act-modal-overlay" id="modal-thrive" onclick="closeActModal(event, 'modal-thrive')">
+  <div class="act-modal">
+    <button class="act-modal-close" onclick="closeActModal(null, 'modal-thrive')" aria-label="Close">&#10005;</button>
+    <p class="act-modal-eyebrow">Wellbeing Programme</p>
+    <h3 class="act-modal-title">Thrive</h3>
+    <p class="act-modal-tagline" style="color:#7EA87E;">Wellbeing through nature</p>
+    <div class="act-modal-divider"></div>
+    <div class="act-modal-body">
+      <p>Thrive is our wellbeing programme, designed to support people of all ages and backgrounds through the restorative power of nature, creativity, and community connection.</p>
+      <p>Set within the Peace Orchard, Thrive brings together individuals who may be experiencing isolation, low mood, or simply a need to reconnect — offering a welcoming, non-clinical space to grow, create, and belong.</p>
+      <p>What Thrive offers:</p>
+      <ul>
+        <li>Seasonal orchard activities — planting, pruning, harvesting</li>
+        <li>Creative arts and craft workshops inspired by the natural environment</li>
+        <li>Intergenerational sessions connecting younger and older participants</li>
+        <li>Mindful outdoor experiences and gentle physical activity</li>
+        <li>A regular, friendly community gathering built around the rhythm of the orchard</li>
+      </ul>
+      <p>Thrive is open to referrals from health and social care, as well as self-referrals. No experience of gardening or art is needed — just a willingness to take part.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Orchard Champions -->
+<div class="act-modal-overlay" id="modal-champions" onclick="closeActModal(event, 'modal-champions')">
+  <div class="act-modal">
+    <button class="act-modal-close" onclick="closeActModal(null, 'modal-champions')" aria-label="Close">&#10005;</button>
+    <p class="act-modal-eyebrow">Schools Programme</p>
+    <h3 class="act-modal-title">Orchard Champions</h3>
+    <p class="act-modal-tagline" style="color:#C49A3C;">Growing young minds</p>
+    <div class="act-modal-divider"></div>
+    <div class="act-modal-body">
+      <p>Orchard Champions is our schools programme, working with primary and secondary pupils to explore themes of peace, remembrance, environmental responsibility, and community — using the orchard as a living classroom.</p>
+      <p>Rooted in the story of Normandy Day UK and the D-Day legacy, the programme gives young people a powerful context for understanding history, sacrifice, and the ongoing work of building peaceful communities.</p>
+      <p>The programme includes:</p>
+      <ul>
+        <li>Curriculum-linked visits to the Peace Orchard in Coundon Hall Park</li>
+        <li>Hands-on planting, growing, and seasonal orchard activities</li>
+        <li>Peace education workshops exploring heritage and remembrance</li>
+        <li>Creative projects — art, writing, and design inspired by the orchard</li>
+        <li>Opportunities for pupils to become stewards of the space</li>
+      </ul>
+      <p>If you're a teacher or school looking to bring your class to the Peace Orchard, get in touch — we'd love to welcome you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Peace Orchard Volunteers -->
+<div class="act-modal-overlay" id="modal-volunteers" onclick="closeActModal(event, 'modal-volunteers')">
+  <div class="act-modal">
+    <button class="act-modal-close" onclick="closeActModal(null, 'modal-volunteers')" aria-label="Close">&#10005;</button>
+    <p class="act-modal-eyebrow">Community Volunteering</p>
+    <h3 class="act-modal-title">Peace Orchard Volunteers</h3>
+    <p class="act-modal-tagline" style="color:#4E7A4E;">The heart of the orchard</p>
+    <div class="act-modal-divider"></div>
+    <div class="act-modal-body">
+      <p>Our volunteers are the lifeblood of The Peace Orchard. Local residents, nature-lovers, and people who simply want to give something back — they show up season after season to keep the orchard thriving.</p>
+      <p>Volunteering with us is flexible, rewarding, and sociable. Whether you can give a few hours a month or a full day each week, there's always something meaningful to get involved in.</p>
+      <p>Volunteer activities include:</p>
+      <ul>
+        <li>Planting, pruning, and general orchard maintenance</li>
+        <li>Supporting community events and workshops</li>
+        <li>Helping with schools visits and community days</li>
+        <li>Litter-picking and habitat care across the wider park</li>
+        <li>Sharing skills — from carpentry to photography to baking</li>
+      </ul>
+      <p>No experience is necessary — just enthusiasm and a pair of sturdy boots. Get in touch to find out when we next meet.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Corporate Orchard Partners -->
+<div class="act-modal-overlay" id="modal-corporate" onclick="closeActModal(event, 'modal-corporate')">
+  <div class="act-modal">
+    <button class="act-modal-close" onclick="closeActModal(null, 'modal-corporate')" aria-label="Close">&#10005;</button>
+    <p class="act-modal-eyebrow">Business Engagement</p>
+    <h3 class="act-modal-title">Corporate Orchard Partners</h3>
+    <p class="act-modal-tagline" style="color:#2E4057;">Connecting business with community</p>
+    <div class="act-modal-divider"></div>
+    <div class="act-modal-body">
+      <p>The Corporate Orchard Partners programme offers businesses and organisations a meaningful way to invest in their community — through hands-on involvement, sponsorship, and skills sharing at The Peace Orchard.</p>
+      <p>Whether you're looking for a purposeful team day out, a way to meet your CSR commitments, or a long-term partnership with a registered charity, we offer flexible opportunities that make a real difference.</p>
+      <p>What partnership can look like:</p>
+      <ul>
+        <li>Corporate volunteering days — team building with genuine community impact</li>
+        <li>Event and programme sponsorship — from school visits to seasonal festivals</li>
+        <li>Skills-based volunteering — lending your team's expertise to the project</li>
+        <li>Named sponsorship of orchard features, trees, or infrastructure</li>
+        <li>Staff wellbeing days within the orchard environment</li>
+      </ul>
+      <p>All contributions go directly towards maintaining and growing The Peace Orchard as a free community resource. We'd love to talk about how we can work together — get in touch to start the conversation.</p>
+    </div>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
   <div class="lightbox-img-wrap">
@@ -1354,7 +1524,6 @@
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          // Stagger each item based on its index
           var index = Array.from(items).indexOf(entry.target);
           setTimeout(function() {
             entry.target.classList.add('tl-visible');
@@ -1362,12 +1531,45 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
 
     items.forEach(function(item) {
       observer.observe(item);
     });
+
+    // Fallback: if items are already in viewport on load, trigger them
+    setTimeout(function() {
+      items.forEach(function(item) {
+        var rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          var index = Array.from(items).indexOf(item);
+          setTimeout(function() {
+            item.classList.add('tl-visible');
+          }, index * 350);
+          observer.unobserve(item);
+        }
+      });
+    }, 100);
   })();
+
+  // ACTIVITY MODALS
+  function openActModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeActModal(e, id) {
+    if (e && !e.target.classList.contains('act-modal-overlay') && !e.target.classList.contains('act-modal-close') && e.target.innerHTML !== '✕') return;
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.act-modal-overlay.open').forEach(function(m) {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
 
   function scrollToId(id) {
     const el = document.getElementById(id);
