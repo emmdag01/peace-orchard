@@ -84,7 +84,35 @@
       letter-spacing: 0.1em; text-transform: uppercase;
       color: #3A3A3A; padding: 0.65rem 0;
       border-bottom: 1px solid rgba(168,200,168,0.15);
+      text-decoration: none;
     }
+    .mob-submenu { display: none; }
+    .mob-submenu.open { display: block; }
+    .mob-sub-link { padding-left: 1rem; font-size: 0.78rem; }
+
+    /* Desktop dropdown */
+    .nav-link { text-decoration: none; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle { display: flex; align-items: center; gap: 4px; }
+    .nav-caret { font-size: 0.55rem; }
+    .nav-dropdown-menu {
+      display: none; position: absolute; top: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: rgba(247,243,238,0.98); backdrop-filter: blur(14px);
+      border: 1px solid rgba(168,200,168,0.3);
+      border-radius: 3px; min-width: 200px;
+      padding: 0.4rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      z-index: 300;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-item {
+      display: block; padding: 0.55rem 1.1rem;
+      font-family: 'Jost', sans-serif; font-size: 0.72rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #3A3A3A; text-decoration: none; font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-dropdown-item:hover { color: #7EA87E; }
 
     /* HERO */
     #hero {
@@ -985,12 +1013,27 @@
     </button>
 
     <div class="desk-nav">
-      <button class="nav-link" onclick="scrollToId('about')">About</button>
-      <button class="nav-link" onclick="scrollToId('activities')">Activities</button>
-      <button class="nav-link" onclick="scrollToId('events')">Events</button>
-      <button class="nav-link" onclick="scrollToId('learning')">Learning</button>
-      <button class="nav-link" onclick="scrollToId('gallery')">Gallery</button>
-      <button class="nav-link" onclick="scrollToId('contact')">Contact</button>
+      <a class="nav-link" href="thrive.html">Thrive</a>
+      <a class="nav-link" href="orchard-champions.html">Orchard Champions</a>
+      <a class="nav-link" href="at-the-orchard.html">At the Orchard</a>
+      <a class="nav-link" href="#events">What's On</a>
+      <div class="nav-dropdown">
+        <button class="nav-link nav-dropdown-toggle">Get Involved <span class="nav-caret">&#9660;</span></button>
+        <div class="nav-dropdown-menu">
+          <a class="nav-dropdown-item" href="corporate-programmes.html">Corporate Programmes</a>
+          <a class="nav-dropdown-item" href="commission-us.html">Commission Us</a>
+          <a class="nav-dropdown-item" href="orchard-ambassadors.html">Volunteer &amp; Ambassador</a>
+        </div>
+      </div>
+      <a class="nav-link" href="#resources">Resources</a>
+      <div class="nav-dropdown">
+        <button class="nav-link nav-dropdown-toggle">About <span class="nav-caret">&#9660;</span></button>
+        <div class="nav-dropdown-menu">
+          <a class="nav-dropdown-item" href="who-we-are.html">Who We Are</a>
+          <a class="nav-dropdown-item" href="our-story.html">Our Story</a>
+          <a class="nav-dropdown-item" href="our-approach.html">Our Approach</a>
+        </div>
+      </div>
     </div>
 
     <button class="mob-btn" id="mob-toggle" onclick="toggleMob()" aria-label="Menu">
@@ -998,12 +1041,23 @@
     </button>
   </div>
   <div class="mob-menu" id="mob-menu">
-    <button class="mob-menu-link" onclick="scrollToId('about');closeMob()">About</button>
-    <button class="mob-menu-link" onclick="scrollToId('activities');closeMob()">Activities</button>
-    <button class="mob-menu-link" onclick="scrollToId('events');closeMob()">Events</button>
-    <button class="mob-menu-link" onclick="scrollToId('learning');closeMob()">Learning</button>
-    <button class="mob-menu-link" onclick="scrollToId('gallery');closeMob()">Gallery</button>
-    <button class="mob-menu-link" onclick="scrollToId('contact');closeMob()">Contact</button>
+    <a class="mob-menu-link" href="thrive.html" onclick="closeMob()">Thrive</a>
+    <a class="mob-menu-link" href="orchard-champions.html" onclick="closeMob()">Orchard Champions</a>
+    <a class="mob-menu-link" href="at-the-orchard.html" onclick="closeMob()">At the Orchard</a>
+    <a class="mob-menu-link" href="#events" onclick="closeMob()">What's On</a>
+    <button class="mob-menu-link mob-dropdown-toggle" onclick="toggleMobSub(this)">Get Involved &#9660;</button>
+    <div class="mob-submenu">
+      <a class="mob-menu-link mob-sub-link" href="corporate-programmes.html" onclick="closeMob()">Corporate Programmes</a>
+      <a class="mob-menu-link mob-sub-link" href="commission-us.html" onclick="closeMob()">Commission Us</a>
+      <a class="mob-menu-link mob-sub-link" href="orchard-ambassadors.html" onclick="closeMob()">Volunteer &amp; Ambassador</a>
+    </div>
+    <a class="mob-menu-link" href="#resources" onclick="closeMob()">Resources</a>
+    <button class="mob-menu-link mob-dropdown-toggle" onclick="toggleMobSub(this)">About &#9660;</button>
+    <div class="mob-submenu">
+      <a class="mob-menu-link mob-sub-link" href="who-we-are.html" onclick="closeMob()">Who We Are</a>
+      <a class="mob-menu-link mob-sub-link" href="our-story.html" onclick="closeMob()">Our Story</a>
+      <a class="mob-menu-link mob-sub-link" href="our-approach.html" onclick="closeMob()">Our Approach</a>
+    </div>
   </div>
 </nav>
 
@@ -1187,7 +1241,7 @@
 </section>
 
 <!-- LEARNING -->
-<section id="learning">
+<section id="resources">
   <div class="learning-inner">
     <div class="learning-header">
       <p class="section-eyebrow">Explore &amp; Discover</p>
@@ -1654,6 +1708,11 @@
   function closeMob() {
     const menu = document.getElementById('mob-menu');
     menu.classList.remove('open');
+  }
+
+  function toggleMobSub(btn) {
+    const sub = btn.nextElementSibling;
+    sub.classList.toggle('open');
   }
 
   // Nav scroll class
